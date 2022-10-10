@@ -2,6 +2,8 @@ package restice.azka.noreen;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +19,8 @@ import retrofit2.Response;
 
 public class Details extends AppCompatActivity {
     TextView n,e,g,s;
+    ProgressBar pb;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,8 @@ public class Details extends AppCompatActivity {
         e=findViewById(R.id.email);
         g=findViewById(R.id.gender);
         s=findViewById(R.id.status);
+        pb=findViewById(R.id.progressBar3);
+
 
         Intent intent=getIntent();
         String sid=intent.getStringExtra("ID");
@@ -39,10 +45,10 @@ public class Details extends AppCompatActivity {
                 if(response!=null){
                     List<Students> dataList= response.body();
                     if(dataList != null && dataList.size()>0){
+                        pb.setVisibility(View.GONE);
                         String sname = dataList.get(0).getName();
                         String semail = dataList.get(0).getEmail();
                         String sstatus = dataList.get(0).getStatus();
-
 
                         n.setText("Name: "+sname);
                         e.setText("Email: "+semail);

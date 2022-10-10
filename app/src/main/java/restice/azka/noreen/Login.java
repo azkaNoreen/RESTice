@@ -66,7 +66,7 @@ public class Login extends AppCompatActivity {
                 if(!(un.equals(""))){
                     if(!(pass.equals(""))){
                         RetrofitClient retrofitClient= new RetrofitClient();
-                        Call<List<Students>> studentCall= retrofitClient.getStudentService().getStudent(un);
+                        Call<List<Students>> studentCall= retrofitClient.getStudentService().getStudentByName(un);
                         studentCall.enqueue(new Callback<List<Students>>() {
                             @Override
                             public void onResponse(Call<List<Students>> call, Response<List<Students>> response) {
@@ -78,7 +78,9 @@ public class Login extends AppCompatActivity {
                                         if((pass.equals(passa))){
                                             Toast.makeText(Login.this, "Successfull", Toast.LENGTH_SHORT).show();
                                             Intent intent=new Intent(Login.this,LoadingList.class);
-                                            putPrefernceValues(true);
+                                            Boolean isLogin=true;
+
+                                            putPrefernceValues(isLogin);
                                             intent.putExtra("Name",un);
                                             startActivity(intent);
                                         }else{
@@ -89,7 +91,7 @@ public class Login extends AppCompatActivity {
                             }
                             @Override
                             public void onFailure(Call<List<Students>> call, Throwable t) {
-                                Toast.makeText(Login.this, "Invalid Credentials,please enter correct", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Login.this, "API call failed.", Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -103,8 +105,10 @@ public class Login extends AppCompatActivity {
     }
     public void initSharedPref(){
         sharedPreferences=getSharedPreferences("practicePreferences",MODE_PRIVATE);
+        sharedPreferencesEditor=sharedPreferences.edit();
 
     }
+
     public Boolean getPrefernceValues(){
         Boolean np=sharedPreferences.getBoolean("isLogin",false);
         return np;

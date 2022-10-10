@@ -34,6 +34,10 @@ public interface StudentService {
     @POST("get_student.php")
     Call<List<Students>> getStudent(@Field("id") String id);
 
+    @FormUrlEncoded
+    @POST("get_student.php")
+    Call<List<Students>> getStudentByName(@Field("name") String name);
+
     @POST("all_students.php")
     Call<List<Students>> getAllStudents();
 
