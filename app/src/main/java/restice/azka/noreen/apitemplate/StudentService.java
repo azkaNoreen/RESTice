@@ -32,7 +32,7 @@ public interface StudentService {
 
     @FormUrlEncoded
     @POST("get_student.php")
-    Call<List<Students>> getStudent(@Field("name") String name);
+    Call<List<Students>> getStudent(@Field("id") String id);
 
     @POST("all_students.php")
     Call<List<Students>> getAllStudents();

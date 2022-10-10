@@ -38,9 +38,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             public void onClick(View view) {
 //                Toast.makeText(view.getContext(), st.getName(), Toast.LENGTH_SHORT).show();
                 Intent in=new Intent(view.getContext(), Details.class);
-                in.putExtra("Name",st.getName());
-                in.putExtra("Email",st.getEmail());
-                in.putExtra("Status",st.getStatus());
+//                in.putExtra("Name",st.getName());
+//                in.putExtra("Email",st.getEmail());
+//                in.putExtra("Status",st.getStatus());
                 in.putExtra("ID",st.getId());
 
                 view.getContext().startActivity(in);

@@ -3,8 +3,17 @@ package restice.azka.noreen;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.List;
+
+import restice.azka.noreen.apitemplate.RetrofitClient;
+import restice.azka.noreen.apitemplate.Students;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Details extends AppCompatActivity {
     TextView n,e,g,s;
@@ -19,9 +28,34 @@ public class Details extends AppCompatActivity {
         s=findViewById(R.id.status);
 
         Intent intent=getIntent();
-        n.setText("Name: "+intent.getStringExtra("Name"));
-        e.setText("Email: "+intent.getStringExtra("Email"));
-        g.setText("ID: "+intent.getStringExtra("ID"));
-        s.setText("Status: "+intent.getStringExtra("Status"));
+        String sid=intent.getStringExtra("ID");
+
+
+        RetrofitClient retrofitClient= new RetrofitClient();
+        Call<List<Students>> studentCall= retrofitClient.getStudentService().getStudent(sid);
+        studentCall.enqueue(new Callback<List<Students>>() {
+            @Override
+            public void onResponse(Call<List<Students>> call, Response<List<Students>> response) {
+                if(response!=null){
+                    List<Students> dataList= response.body();
+                    if(dataList != null && dataList.size()>0){
+                        String sname = dataList.get(0).getName();
+                        String semail = dataList.get(0).getEmail();
+                        String sstatus = dataList.get(0).getStatus();
+
+
+                        n.setText("Name: "+sname);
+                        e.setText("Email: "+semail);
+                        g.setText("ID: "+sid);
+                        s.setText("Status: "+sstatus);
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<List<Students>> call, Throwable t) {
+                Toast.makeText(Details.this, "Invalid Credentials,please enter correct", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }
