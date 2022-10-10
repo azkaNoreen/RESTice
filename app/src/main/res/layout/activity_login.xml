@@ -13,7 +13,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="110dp"
         android:text="Welcome"
-        android:textColor="@color/black"
+        android:textColor="@color/teal_700"
         android:textSize="36sp"
         android:textStyle="bold"></TextView>
 
@@ -25,6 +25,8 @@
         android:layout_below="@+id/wel"
         android:layout_centerHorizontal="true"
         android:id="@+id/signing"
+        android:textColor="@color/teal_700"
+
         ></TextView>
     <EditText
         android:layout_width="match_parent"
@@ -58,7 +60,7 @@
         android:layout_below="@+id/password"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/teal_700"
         android:text="SIGN IN"
         android:textColor="@color/white"
         android:textSize="24sp"

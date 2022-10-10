@@ -13,7 +13,7 @@
         android:text="Sign Up"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="90dp"
-        android:textColor="@color/black"
+        android:textColor="@color/teal_700"
         android:textSize="36sp"
         android:textStyle="bold"
         ></TextView>
@@ -26,6 +26,8 @@
         android:layout_below="@+id/sign"
         android:layout_centerHorizontal="true"
         android:id="@+id/data"
+        android:textColor="@color/teal_700"
+
         ></TextView>
 
     <EditText
@@ -90,7 +92,7 @@
         android:layout_below="@+id/status"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/teal_700"
         android:text="SIGN UP"
         android:textSize="24sp"
         android:layout_marginTop="10dp"
