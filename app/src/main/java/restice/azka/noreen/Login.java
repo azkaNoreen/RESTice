@@ -26,11 +26,13 @@ public class Login extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     ProgressBar progressBar;
     TextView signup;
+    SharedPreferences.Editor sharedPreferencesEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         initSharedPref();
 
         username=findViewById(R.id.name);
@@ -38,6 +40,13 @@ public class Login extends AppCompatActivity {
         login=findViewById(R.id.login);
         progressBar=findViewById(R.id.progressBar3);
         signup=findViewById(R.id.signup);
+
+        Boolean isLogin=getPrefernceValues();
+
+        if(isLogin){
+            Intent intent=new Intent(Login.this,LoadingList.class);
+            startActivity(intent);
+        }
 
         progressBar.setVisibility(View.GONE);
         signup.setOnClickListener(new View.OnClickListener() {
@@ -53,12 +62,9 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 String un=username.getText().toString();
                 String pass=password.getText().toString();
-                String[] preferences=getPrefernceValues();
 
                 if(!(un.equals(""))){
                     if(!(pass.equals(""))){
-                        Toast.makeText(Login.this, un, Toast.LENGTH_SHORT).show();
-
                         RetrofitClient retrofitClient= new RetrofitClient();
                         Call<List<Students>> studentCall= retrofitClient.getStudentService().getStudent(un);
                         studentCall.enqueue(new Callback<List<Students>>() {
@@ -72,6 +78,8 @@ public class Login extends AppCompatActivity {
                                         if((pass.equals(passa))){
                                             Toast.makeText(Login.this, "Successfull", Toast.LENGTH_SHORT).show();
                                             Intent intent=new Intent(Login.this,LoadingList.class);
+                                            putPrefernceValues(true);
+                                            intent.putExtra("Name",un);
                                             startActivity(intent);
                                         }else{
                                             Toast.makeText(Login.this, "Invalid Credentials,please enter correct", Toast.LENGTH_SHORT).show();
@@ -97,11 +105,12 @@ public class Login extends AppCompatActivity {
         sharedPreferences=getSharedPreferences("practicePreferences",MODE_PRIVATE);
 
     }
-    public String[] getPrefernceValues(){
-        String np=sharedPreferences.getString("Name","no Name");
-        String nr=sharedPreferences.getString("Password","no Password");
-
-        String[] signupValues={np,nr};
-        return signupValues;
+    public Boolean getPrefernceValues(){
+        Boolean np=sharedPreferences.getBoolean("isLogin",false);
+        return np;
+    }
+    public void putPrefernceValues(Boolean n){
+        sharedPreferencesEditor.putBoolean("isLogin",n);
+        sharedPreferencesEditor.apply();
     }
 }
