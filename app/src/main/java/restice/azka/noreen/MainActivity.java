@@ -70,8 +70,7 @@ public class MainActivity extends AppCompatActivity {
                                     String resp=dataList.getResponse();
                                     if(resp.contains("successfully")){
                                         Toast.makeText(MainActivity.this,"Signed up", Toast.LENGTH_SHORT).show();
-                                        Intent intent=new Intent(MainActivity.this,Login.class);
-                                        startActivity(intent);
+                                        finish();
 
                                     }else{
                                         Toast.makeText(MainActivity.this, "Account already exists", Toast.LENGTH_SHORT).show();

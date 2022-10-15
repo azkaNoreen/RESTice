@@ -33,6 +33,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         studentViewHolder.studentPhone.setText("Name: "+st.getName());
         studentViewHolder.studentTextName.setText("Id: "+st.getId()+"");
+        studentViewHolder.studentEmail.setText("Email: "+st.getEmail()+"");
+
         studentViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,13 +63,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         TextView studentTextName;
         TextView studentPhone;
-        public StudentViewHolder(@NonNull View itemView) {
+    TextView studentEmail;
+
+    public StudentViewHolder(@NonNull View itemView) {
             super(itemView);
 
             studentTextName=itemView.findViewById(R.id.name);
             studentPhone=itemView.findViewById(R.id.email);
+        studentEmail=itemView.findViewById(R.id.semail);
 
-        }
+
+    }
     }
 
 }
