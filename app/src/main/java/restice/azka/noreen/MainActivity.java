@@ -52,7 +52,10 @@ public class MainActivity extends AppCompatActivity {
                 String emai=email.getText().toString();
                 String statu=status.getText().toString();
 
-
+                if(passwor.equals("")){
+                    if(statu.equals("")){
+                    if(emai.equals("")){
+                if(username.equals("")){
                 if(passwor.equals(repasswor)){
                     putPrefernceValues(username,passwor);
                     progressBar.setVisibility(View.VISIBLE);
@@ -87,6 +90,17 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     Toast.makeText(MainActivity.this, "Please enter same password and repassword", Toast.LENGTH_SHORT).show();
                 }
+                }else{
+                    Toast.makeText(MainActivity.this, "Please enter Name", Toast.LENGTH_SHORT).show();
+                }}else{
+                    Toast.makeText(MainActivity.this, "Please enter Email", Toast.LENGTH_SHORT).show();
+                }}else{
+                    Toast.makeText(MainActivity.this, "Please enter Status", Toast.LENGTH_SHORT).show();
+                }}else{
+                    Toast.makeText(MainActivity.this, "Please enter Password", Toast.LENGTH_SHORT).show();
+
+                }
+
             }
         });
 

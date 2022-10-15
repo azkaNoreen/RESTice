@@ -39,6 +39,12 @@ public class LoadingList extends AppCompatActivity {
         setSupportActionBar(toolba); //set toolbar to act as action bar
         getAllUser();
     }
+
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
+    }
+
     private void getAllUser(){
         RetrofitClient retrofitClient= new RetrofitClient();
         Call<List<Students>> userCall= retrofitClient.getStudentService().getAllStudents();
